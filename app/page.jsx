@@ -117,6 +117,8 @@ export default function Home() {
             alt="Surfer lifting a yellow board over a breaking wave"
           />
           <div className="hero-scrims" />
+        </div>
+        <div className="hero-layer">
           <header className="site-header">
             <div className="promo-strip" aria-label="Current offers">
               <div>

@@ -1,0 +1,375 @@
+import { Menu, Search, ShoppingBag, UserRound } from "lucide-react";
+import HeroScrollEffect from "./HeroScrollEffect";
+
+const navItems = ["Shop", "Explore", "Support", "Learn"];
+const promoItems = [
+  "Free UK delivery for orders over GBP 50",
+  "365 Day Returns",
+  "Buy 3, get 1 free",
+];
+const primaryNav = [
+  {
+    label: "Shop",
+    href: "#top",
+    featured: ["All Products", "New Arrivals", "Best Sellers", "Bundles"],
+    columns: [
+      ["Daily essentials", "Peptides", "Supplements", "Testing kits"],
+      ["Longevity stacks", "Recovery tools", "Travel support", "Subscriptions"],
+    ],
+  },
+  {
+    label: "Categories",
+    href: "#top",
+    featured: ["Recovery", "Performance", "Longevity", "Cognitive"],
+    columns: [
+      ["Cellular health", "Gut support", "Sleep quality", "Hydration"],
+      ["Stress balance", "Metabolic care", "Skin health", "Immune support"],
+    ],
+  },
+  {
+    label: "Research",
+    href: "#curation",
+    featured: [
+      "Metabolic Research",
+      "Weight Management",
+      "Skin & Healing Research",
+    ],
+    columns: [
+      ["Clinical notes", "Ingredient library", "Expert reviews", "Protocols"],
+      [
+        "Founder letters",
+        "Lab standards",
+        "Community results",
+        "Field reports",
+      ],
+    ],
+  },
+  {
+    label: "About",
+    href: "#promise",
+  },
+];
+
+const pillars = [
+  { title: "STRENGTH", image: "/images/pill-strength.jpg", tone: "sage" },
+  { title: "VITALITY", image: "/images/pill-vitality.jpg", tone: "steel" },
+  { title: "RECOVERY", image: "/images/orange-bottle.jpg", tone: "honey" },
+  { title: "SLEEP", image: "/images/amber-bottle.jpg", tone: "ember" },
+];
+
+const bestsellingProducts = [
+  {
+    name: "NAD+ 1000mg",
+    copy: "Flagship cellular energy support for performance and healthy ageing.",
+    image: "/images/product-nad.png",
+  },
+  {
+    name: "GLOW",
+    copy: "BPC-157, TB-500 and GHK-CU for skin, recovery and repair rituals.",
+    image: "/images/product-glow.png",
+  },
+  {
+    name: "PT-141",
+    copy: "A focused peptide protocol for vitality, drive and intimate wellbeing.",
+    image: "/images/product-pt141.png",
+  },
+  {
+    name: "KLOW",
+    copy: "BPC-157, TB-500, GHK-CU and KPV in one all-in recovery stack.",
+    image: "/images/product-klow.png",
+  },
+];
+
+const process = [
+  [
+    "01.",
+    "Discovery",
+    "We scan the frontier of human health, then separate evidence from noise.",
+  ],
+  [
+    "02.",
+    "Expert Validation",
+    "Every claim is pressure tested by practitioners and scientists.",
+  ],
+  [
+    "03.",
+    "Community Testing",
+    "Products earn their place through real human feedback, not trend velocity.",
+  ],
+];
+
+function ArrowButton({ label = "Open", symbol = "+" }) {
+  return (
+    <button className="circle-button" aria-label={label}>
+      <span aria-hidden="true">{symbol}</span>
+    </button>
+  );
+}
+
+export default function Home() {
+  return (
+    <main>
+      <section className="hero-section">
+        <HeroScrollEffect />
+        <div className="hero-media">
+          <img
+            src="/images/hero-longevity.jpg"
+            alt="Surfer lifting a yellow board over a breaking wave"
+          />
+          <div className="hero-scrims" />
+          <header className="site-header">
+            <div className="promo-strip" aria-label="Current offers">
+              <div>
+                {Array.from({ length: 4 }).flatMap((_, repeatIndex) =>
+                  promoItems.map((item, itemIndex) => (
+                    <span key={`${repeatIndex}-${itemIndex}`}>
+                      {item}
+                      <b aria-hidden="true">•</b>
+                    </span>
+                  )),
+                )}
+              </div>
+            </div>
+            <nav className="topbar" aria-label="Primary navigation">
+              <div className="nav-left">
+                <button className="menu-button" aria-label="Open menu">
+                  <Menu size={24} strokeWidth={1.8} aria-hidden="true" />
+                </button>
+                <ul className="nav-links">
+                  {primaryNav.map((item) => (
+                    <li
+                      className={
+                        item.featured ? "nav-item has-menu" : "nav-item"
+                      }
+                      key={item.label}
+                    >
+                      <a href={item.href}>{item.label}</a>
+                      {item.featured ? (
+                        <div
+                          className="mega-menu"
+                          aria-label={`${item.label} menu`}
+                        >
+                          <div className="mega-featured">
+                            {item.featured.map((link) => (
+                              <a href={item.href} key={link}>
+                                {link}
+                              </a>
+                            ))}
+                          </div>
+                          <div className="mega-body">
+                            <div>
+                              <h3>{item.label}</h3>
+                              <p>
+                                Curated products and thinking for evidence-led
+                                daily rituals.
+                              </p>
+                            </div>
+                            <div className="mega-columns">
+                              {item.columns.map((column, columnIndex) => (
+                                <div key={`${item.label}-${columnIndex}`}>
+                                  {column.map((link) => (
+                                    <a href={item.href} key={link}>
+                                      {link}
+                                    </a>
+                                  ))}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a className="brand" href="#top" aria-label="MyLongevity home">
+                MyLongevity
+              </a>
+              <div className="nav-actions">
+                <label className="search-control" htmlFor="site-search">
+                  <input
+                    id="site-search"
+                    type="search"
+                    placeholder="Search all products"
+                  />
+                  <Search size={24} strokeWidth={1.8} aria-hidden="true" />
+                </label>
+                <button
+                  className="icon-button"
+                  type="button"
+                  aria-label="Account"
+                >
+                  <UserRound size={24} strokeWidth={1.7} aria-hidden="true" />
+                </button>
+                <button className="icon-button" type="button" aria-label="Cart">
+                  <ShoppingBag size={25} strokeWidth={1.7} aria-hidden="true" />
+                </button>
+              </div>
+            </nav>
+          </header>
+          <div className="hero-copy">
+            <p>
+              Wellness,
+              <br />
+              Personalized
+            </p>
+            <h1>Own the rituals that move your health forward.</h1>
+            <a href="#top">Explore</a>
+          </div>
+        </div>
+      </section>
+
+      <section className="dark-section pillars-section" id="top">
+        <div className="section-heading split">
+          <h2>The Essentials</h2>
+        </div>
+        <div className="pillar-grid">
+          {pillars.map((pillar) => (
+            <article
+              className={`pillar-card ${pillar.tone}`}
+              key={pillar.title}
+            >
+              <img src={pillar.image} alt="" />
+              <div>
+                <h3>{pillar.title}</h3>
+                <ArrowButton label={`Explore ${pillar.title}`} />
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="wellbeing-row">
+          {/* <h2>Wellbeing looks different for everyone. We respect that. In fact, we champion it.</h2> */}
+          <h2>Because true longevity requires more than just supplements.</h2>
+          <div className="brand-list">
+            <p>Our Bestsellers</p>
+            {bestsellingProducts.map((product) => (
+              <article key={product.name}>
+                <div className="brand-thumb">
+                  <img src={product.image} alt="" />
+                </div>
+                <div>
+                  <h3>{product.name}</h3>
+                  <span>{product.copy}</span>
+                </div>
+                <ArrowButton label={`Open ${product.name}`} />
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="dark-section process-section" id="curation">
+        <div className="process-shell">
+          <aside className="process-rail">
+            <h2>
+              My Longevity Curation
+              <br />
+              ProcessTM
+            </h2>
+            {/* <div className="process-words" aria-hidden="true">
+              {Array.from({ length: 16 }).map((_, index) => (
+                <span key={index}>ProcessTM</span>
+              ))}
+            </div> */}
+            <p>
+              We are obsessed with what makes it onto the site. Only products
+              that survive intense review earn a place here.
+            </p>
+          </aside>
+          <div className="process-stories">
+            {process.map(([number, title, copy], index) => (
+              <article key={title}>
+                <img
+                  src={
+                    index === 0
+                      ? "/images/discovery-molecule.jpg"
+                      : index === 1
+                        ? "/images/orange-bottle.jpg"
+                        : "/images/supplements-flatlay.jpg"
+                  }
+                  alt=""
+                />
+                <div>
+                  <span>{number}</span>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+        {/* <div className="advisors">
+          <p>Meet our Advisors</p>
+          {[
+            "Rose Ferguson",
+            "Bryony Deane",
+            "Jenny Wilkinson",
+            "Dr. Tara Swart",
+          ].map((name) => (
+            <span key={name}>{name}</span>
+          ))}
+        </div> */}
+        {/* <div className="quote-card">
+          <img src="/images/supplements-flatlay.jpg" alt="" />
+          <blockquote>
+            “I believe food should be celebrated as a source of energy,
+            connection, and wellbeing. With My Longevity, let's redefine what it
+            means to truly nourish yourself.”
+          </blockquote>
+        </div> */}
+      </section>
+
+      {/* <section className="promise-section" id="promise">
+        <div className="promise-bg">
+          <img src="/images/hero-training.jpg" alt="" />
+        </div>
+        <div className="promise-content">
+          <h2>THE MY LONGEVITY PROMISE</h2>
+          <div className="promise-tabs">
+            <span>All Day Price Match</span>
+            <span>Over 1000 Reviews</span>
+          </div>
+          <div className="review-row">
+            {[
+              "One of the best wellbeing websites I've come across.",
+              "The best wellbeing website.",
+              "Amazing!",
+              "Great products, quick delivery.",
+            ].map((review) => (
+              <article key={review}>
+                <div className="stars">★★★★★</div>
+                <p>{review}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section> */}
+
+      <footer className="footer">
+        <div className="footer-logo">My Longevity</div>
+        <div className="footer-columns">
+          <div>
+            {navItems.map((item) => (
+              <button key={item}>
+                {item}
+                <span>+</span>
+              </button>
+            ))}
+          </div>
+          <form>
+            <label htmlFor="email">
+              <span>NEWSLETTER</span>
+              <strong>
+                Subscribers Get To Know First
+              </strong>
+            </label>
+            <div>
+              <input id="email" type="email" placeholder="Email" />
+              <button type="submit">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </footer>
+    </main>
+  );
+}

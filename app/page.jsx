@@ -106,11 +106,101 @@ function ArrowButton({ label = "Open", symbol = "+" }) {
   );
 }
 
+function SiteHeader() {
+  return (
+    <header className="site-header">
+      <div className="promo-strip" aria-label="Current offers">
+        <div>
+          {Array.from({ length: 4 }).flatMap((_, repeatIndex) =>
+            promoItems.map((item, itemIndex) => (
+              <span key={`${repeatIndex}-${itemIndex}`}>
+                {item}
+                <b aria-hidden="true">•</b>
+              </span>
+            )),
+          )}
+        </div>
+      </div>
+      <nav className="topbar" aria-label="Primary navigation">
+        <div className="nav-left">
+          <button className="menu-button" aria-label="Open menu">
+            <Menu size={24} strokeWidth={1.8} aria-hidden="true" />
+          </button>
+          <ul className="nav-links">
+            {primaryNav.map((item) => (
+              <li
+                className={item.featured ? "nav-item has-menu" : "nav-item"}
+                key={item.label}
+              >
+                <a href={item.href}>{item.label}</a>
+                {item.featured ? (
+                  <div
+                    className="mega-menu"
+                    aria-label={`${item.label} menu`}
+                  >
+                    <div className="mega-featured">
+                      {item.featured.map((link) => (
+                        <a href={item.href} key={link}>
+                          {link}
+                        </a>
+                      ))}
+                    </div>
+                    <div className="mega-body">
+                      <div>
+                        <h3>{item.label}</h3>
+                        <p>
+                          Curated products and thinking for evidence-led daily
+                          rituals.
+                        </p>
+                      </div>
+                      <div className="mega-columns">
+                        {item.columns.map((column, columnIndex) => (
+                          <div key={`${item.label}-${columnIndex}`}>
+                            {column.map((link) => (
+                              <a href={item.href} key={link}>
+                                {link}
+                              </a>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <a className="brand" href="#top" aria-label="MyLongevity home">
+          MyLongevity.
+        </a>
+        <div className="nav-actions">
+          <label className="search-control" htmlFor="site-search">
+            <input
+              id="site-search"
+              type="search"
+              placeholder="Search all products"
+            />
+            <Search size={24} strokeWidth={1.8} aria-hidden="true" />
+          </label>
+          <button className="icon-button" type="button" aria-label="Account">
+            <UserRound size={24} strokeWidth={1.7} aria-hidden="true" />
+          </button>
+          <button className="icon-button" type="button" aria-label="Cart">
+            <ShoppingBag size={25} strokeWidth={1.7} aria-hidden="true" />
+          </button>
+        </div>
+      </nav>
+    </header>
+  );
+}
+
 export default function Home() {
   return (
     <main>
+      <HeroScrollEffect />
+      <SiteHeader />
       <section className="hero-section">
-        <HeroScrollEffect />
         <div className="hero-media">
           <img
             src="/images/hero-longevity.jpg"
@@ -119,96 +209,6 @@ export default function Home() {
           <div className="hero-scrims" />
         </div>
         <div className="hero-layer">
-          <header className="site-header">
-            <div className="promo-strip" aria-label="Current offers">
-              <div>
-                {Array.from({ length: 4 }).flatMap((_, repeatIndex) =>
-                  promoItems.map((item, itemIndex) => (
-                    <span key={`${repeatIndex}-${itemIndex}`}>
-                      {item}
-                      <b aria-hidden="true">•</b>
-                    </span>
-                  )),
-                )}
-              </div>
-            </div>
-            <nav className="topbar" aria-label="Primary navigation">
-              <div className="nav-left">
-                <button className="menu-button" aria-label="Open menu">
-                  <Menu size={24} strokeWidth={1.8} aria-hidden="true" />
-                </button>
-                <ul className="nav-links">
-                  {primaryNav.map((item) => (
-                    <li
-                      className={
-                        item.featured ? "nav-item has-menu" : "nav-item"
-                      }
-                      key={item.label}
-                    >
-                      <a href={item.href}>{item.label}</a>
-                      {item.featured ? (
-                        <div
-                          className="mega-menu"
-                          aria-label={`${item.label} menu`}
-                        >
-                          <div className="mega-featured">
-                            {item.featured.map((link) => (
-                              <a href={item.href} key={link}>
-                                {link}
-                              </a>
-                            ))}
-                          </div>
-                          <div className="mega-body">
-                            <div>
-                              <h3>{item.label}</h3>
-                              <p>
-                                Curated products and thinking for evidence-led
-                                daily rituals.
-                              </p>
-                            </div>
-                            <div className="mega-columns">
-                              {item.columns.map((column, columnIndex) => (
-                                <div key={`${item.label}-${columnIndex}`}>
-                                  {column.map((link) => (
-                                    <a href={item.href} key={link}>
-                                      {link}
-                                    </a>
-                                  ))}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      ) : null}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <a className="brand" href="#top" aria-label="MyLongevity home">
-                MyLongevity
-              </a>
-              <div className="nav-actions">
-                <label className="search-control" htmlFor="site-search">
-                  <input
-                    id="site-search"
-                    type="search"
-                    placeholder="Search all products"
-                  />
-                  <Search size={24} strokeWidth={1.8} aria-hidden="true" />
-                </label>
-                <button
-                  className="icon-button"
-                  type="button"
-                  aria-label="Account"
-                >
-                  <UserRound size={24} strokeWidth={1.7} aria-hidden="true" />
-                </button>
-                <button className="icon-button" type="button" aria-label="Cart">
-                  <ShoppingBag size={25} strokeWidth={1.7} aria-hidden="true" />
-                </button>
-              </div>
-            </nav>
-          </header>
           <div className="hero-copy">
             <p>
               Wellness,
@@ -264,13 +264,13 @@ export default function Home() {
         <div className="process-shell">
           <aside className="process-rail">
             <h2>
-              My Longevity Curation
+              MyLongevity Curation
               <br />
-              ProcessTM
+              Process
             </h2>
             {/* <div className="process-words" aria-hidden="true">
               {Array.from({ length: 16 }).map((_, index) => (
-                <span key={index}>ProcessTM</span>
+                <span key={index}>Process</span>
               ))}
             </div> */}
             <p>
@@ -348,7 +348,7 @@ export default function Home() {
       </section> */}
 
       <footer className="footer">
-        <div className="footer-logo">My Longevity</div>
+        <div className="footer-logo">MyLongevity.</div>
         <div className="footer-columns">
           <div>
             {navItems.map((item) => (
@@ -361,9 +361,7 @@ export default function Home() {
           <form>
             <label htmlFor="email">
               <span>NEWSLETTER</span>
-              <strong>
-                Subscribers Get To Know First
-              </strong>
+              <strong>Subscribers Get To Know First</strong>
             </label>
             <div>
               <input id="email" type="email" placeholder="Email" />

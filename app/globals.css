@@ -9,6 +9,8 @@
   --line: rgba(255, 255, 255, 0.16);
   --soft-line: rgba(9, 9, 9, 0.1);
   --radius: 8px;
+  --site-nav-y: 0px;
+  --site-nav-opacity: 1;
 }
 
 * {
@@ -47,8 +49,6 @@ img {
 }
 
 .hero-section {
-  --hero-header-y: 0px;
-  --hero-header-opacity: 1;
   position: relative;
   min-height: calc(100svh + clamp(96px, 12svh, 150px));
   background: var(--black);
@@ -69,9 +69,6 @@ img {
   inset: 8px 18px auto;
   z-index: 20;
   color: var(--white);
-  opacity: var(--hero-header-opacity);
-  transform: translate3d(0, var(--hero-header-y), 0);
-  will-change: transform, opacity;
   pointer-events: auto;
 }
 
@@ -121,12 +118,15 @@ img {
   color: var(--white);
   background: transparent;
   backdrop-filter: none;
+  opacity: var(--site-nav-opacity);
+  transform: translate3d(0, var(--site-nav-y), 0);
+  will-change: transform, opacity;
   text-shadow: 0 1px 14px rgba(0, 0, 0, 0.28);
-  transition: min-height 200ms ease, background 200ms ease, color 200ms ease, text-shadow 200ms ease, box-shadow 200ms ease;
+  transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1), opacity 560ms ease, min-height 220ms ease, background 220ms ease, color 220ms ease, text-shadow 220ms ease, box-shadow 220ms ease;
 }
 
-.site-header:hover .topbar,
-.site-header:focus-within .topbar {
+.topbar:hover,
+.topbar:focus-within {
   min-height: 78px;
   color: var(--ink);
   background: rgba(255, 255, 255, 0.96);
@@ -576,12 +576,14 @@ p {
   display: grid;
   place-items: center;
   padding: 0;
-  transition: background 180ms ease, color 180ms ease;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .circle-button:hover {
   background: var(--white);
   color: var(--black);
+  transform: scale(1.06);
 }
 
 .wellbeing-row {
@@ -657,10 +659,23 @@ p {
 }
 
 .brand-list .circle-button {
-  width: clamp(34px, 3.2vw, 46px);
-  height: clamp(34px, 3.2vw, 46px);
-  font-size: clamp(17px, 1.6vw, 22px);
+  position: relative;
+  z-index: 1;
+  width: clamp(28px, 2.6vw, 38px);
+  height: clamp(28px, 2.6vw, 38px);
+  border-color: rgba(255, 255, 255, 0.78);
+  color: var(--white);
+  font-size: clamp(16px, 1.35vw, 20px);
   font-weight: 500;
+  pointer-events: auto;
+}
+
+.brand-list .circle-button span {
+  display: block;
+  max-width: none;
+  color: inherit;
+  font-size: inherit;
+  line-height: 1;
 }
 
 .brand-list .circle-button:hover,
@@ -1344,13 +1359,9 @@ p {
     font-size: 86px;
   }
 
-  .promo-strip {
-    display: none;
-  }
-
   .topbar {
     min-height: 50px;
-    margin-top: 0;
+    margin-top: 6px;
   }
 
   .nav-actions {

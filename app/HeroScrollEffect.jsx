@@ -4,37 +4,46 @@ import { useLayoutEffect } from "react";
 
 export default function HeroScrollEffect() {
   useLayoutEffect(() => {
-    const hero = document.querySelector(".hero-section");
-    const header = document.querySelector(".site-header");
+    const topbar = document.querySelector(".topbar");
 
-    if (!hero || !header) {
+    if (!topbar) {
       return undefined;
     }
 
     let frame = 0;
     let lastY = "";
     let lastOpacity = "";
+    let lastScrollY = window.scrollY;
+    let direction = "down";
 
     const update = () => {
       frame = 0;
-      const rect = hero.getBoundingClientRect();
-      const holdDistance = 52;
-      const tuckDistance = 58;
-      const scrolledPastTop = Math.max(0, -rect.top);
-      const tuckProgress = Math.min(
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY;
+
+      if (Math.abs(scrollDelta) > 3) {
+        direction = scrollDelta < 0 ? "up" : "down";
+      }
+
+      lastScrollY = currentScrollY;
+      const holdDistance = 230;
+      const tuckDistance = 170;
+      const downProgress = Math.min(
         1,
-        Math.max(0, (scrolledPastTop - holdDistance) / tuckDistance),
+        Math.max(0, (currentScrollY - holdDistance) / tuckDistance),
       );
-      const y = `${Math.round(tuckProgress * -(header.offsetHeight + 18))}px`;
-      const opacity = `${1 - tuckProgress * 0.35}`;
+      const shouldShow = currentScrollY <= 12 || direction === "up";
+      const tuckProgress = shouldShow ? 0 : downProgress;
+      const y = `${Math.round(tuckProgress * -(topbar.offsetHeight + 54))}px`;
+      const opacity = `${1 - tuckProgress * 0.42}`;
 
       if (y !== lastY) {
-        hero.style.setProperty("--hero-header-y", y);
+        document.documentElement.style.setProperty("--site-nav-y", y);
         lastY = y;
       }
 
       if (opacity !== lastOpacity) {
-        hero.style.setProperty("--hero-header-opacity", opacity);
+        document.documentElement.style.setProperty("--site-nav-opacity", opacity);
         lastOpacity = opacity;
       }
     };

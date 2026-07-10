@@ -127,6 +127,7 @@ img {
 
 .topbar:hover,
 .topbar:focus-within,
+.topbar:has(.has-menu.is-menu-open),
 .site-nav-revealed .topbar {
   min-height: 78px;
   color: var(--ink);
@@ -263,20 +264,33 @@ img {
 }
 
 .mega-featured a,
+.mega-featured button,
 .mega-columns a {
   text-decoration: none;
   color: #5c5a56;
   transition: color 160ms ease;
 }
 
-.mega-featured a {
+.mega-featured a,
+.mega-featured button {
   font-size: 17px;
   font-weight: 500;
   white-space: nowrap;
 }
 
+.mega-featured button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
 .mega-featured a:hover,
+.mega-featured button:hover,
 .mega-featured a:focus,
+.mega-featured button:focus,
+.mega-featured button.is-active,
 .mega-columns a:hover,
 .mega-columns a:focus {
   color: var(--black);
@@ -415,7 +429,7 @@ img {
 }
 
 .hero-copy p {
-  font-size: clamp(64px, 5vw, 80px);
+  font-size: 48px;
   line-height: 0.98;
   max-width: 520px;
   font-weight: 500;
@@ -1083,6 +1097,7 @@ p {
   font-weight: 400;
   line-height: 1.25;
 }
+
 
 .footer {
   position: relative;

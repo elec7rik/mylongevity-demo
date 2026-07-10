@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   Menu,
   MessageCircle,
@@ -9,7 +12,7 @@ import HeroScrollEffect from "./HeroScrollEffect";
 
 const navItems = ["Shop", "Explore", "Support", "Learn"];
 const promoItems = [
-  "Free UK delivery for orders over GBP 50",
+  "Free UK delivery for orders over £50",
   "365 Day Returns",
   "Buy 3, get 1 free",
 ];
@@ -17,16 +20,177 @@ const primaryNav = [
   {
     label: "Shop",
     href: "#top",
-    featured: ["All Products", "New Arrivals", "Best Sellers", "Bundles"],
-    columns: [
-      ["Daily essentials", "Peptides", "Supplements", "Testing kits"],
-      ["Longevity stacks", "Recovery tools", "Travel support", "Subscriptions"],
+    featured: [
+      {
+        label: "All Products",
+        panel: {
+          heading: "Shop",
+          copy: "Curated products and thinking for evidence-led daily rituals.",
+          columns: [
+            ["Daily essentials", "Peptides", "Supplements", "Testing kits"],
+            [
+              "Longevity stacks",
+              "Recovery tools",
+              "Travel support",
+              "Subscriptions",
+            ],
+          ],
+        },
+      },
+      {
+        label: "New Arrivals",
+        panel: {
+          heading: "New Arrivals",
+          copy: "Fresh launches and just-landed routines to explore first.",
+          columns: [
+            [
+              "Marine collagen sachets",
+              "Magnesium sleep duo",
+              "Focus adaptogen blend",
+              "Hydration tabs",
+            ],
+            [
+              "Ice roller",
+              "Mini massage gun",
+              "Travel recovery kit",
+              "Recovery tracker",
+            ],
+          ],
+        },
+      },
+      {
+        label: "Best Sellers",
+        panel: {
+          heading: "Best Sellers",
+          copy: "Most-loved staples and repeat-order rituals from the community.",
+          columns: [
+            [
+              "Daily electrolytes",
+              "Creatine monohydrate",
+              "Magnesium glycinate",
+              "Recovery protein",
+            ],
+            [
+              "Sleep stack",
+              "Hydration toolkit",
+              "Joint support",
+              "Travel immunity pack",
+            ],
+          ],
+        },
+      },
+      {
+        label: "Bundles",
+        panel: {
+          heading: "Bundles",
+          copy: "Goal-based edits that make it easier to start with a full setup.",
+          columns: [
+            [
+              "Morning ritual",
+              "Strength builder",
+              "Hydration reset",
+              "Travel essentials",
+            ],
+            [
+              "Post-workout stack",
+              "Weekend restore",
+              "Sleep starter",
+              "Healthy home edit",
+            ],
+          ],
+        },
+      },
     ],
   },
   {
     label: "Categories",
     href: "#top",
-    featured: ["Recovery", "Performance", "Longevity", "Cognitive"],
+    featured: [
+      {
+        label: "Recovery",
+        panel: {
+          heading: "Recovery",
+          copy: "Support for repair, soreness, sleep quality, and bouncing back faster.",
+          columns: [
+            [
+              "Deep sleep",
+              "Muscle repair",
+              "Joint resilience",
+              "Inflammation balance",
+            ],
+            [
+              "Recovery tools",
+              "Magnesium support",
+              "Protein blends",
+              "Evening rituals",
+            ],
+          ],
+        },
+      },
+      {
+        label: "Performance",
+        panel: {
+          heading: "Performance",
+          copy: "Daily inputs for energy, output, hydration, and sharper training sessions.",
+          columns: [
+            [
+              "Endurance",
+              "Power output",
+              "Hydration",
+              "Mental drive",
+            ],
+            [
+              "Electrolytes",
+              "Creatine",
+              "Pre-workout support",
+              "Wearables",
+            ],
+          ],
+        },
+      },
+      {
+        label: "Longevity",
+        panel: {
+          heading: "Longevity",
+          copy: "Foundational routines for healthy ageing, resilience, and long-term wellbeing.",
+          columns: [
+            [
+              "Cellular health",
+              "Healthy ageing",
+              "Metabolic care",
+              "Hormonal balance",
+            ],
+            [
+              "Testing kits",
+              "Daily essentials",
+              "Longevity stacks",
+              "Subscriptions",
+            ],
+          ],
+        },
+      },
+      {
+        label: "Cognitive",
+        panel: {
+          heading: "Cognitive",
+          copy: "Sharper focus, calmer stress response, and steadier mood across the day.",
+          columns: [
+            [
+              "Brain focus",
+              "Calm energy",
+              "Stress balance",
+              "Mood support",
+            ],
+            [
+              "Adaptogen blends",
+              "Nootropic support",
+              "Hydration tabs",
+              "Morning rituals",
+            ],
+          ],
+        },
+      },
+    ],
     columns: [
       ["Cellular health", "Gut support", "Sleep quality", "Hydration"],
       ["Stress balance", "Metabolic care", "Skin health", "Immune support"],
@@ -36,9 +200,69 @@ const primaryNav = [
     label: "Research",
     href: "#curation",
     featured: [
-      "Metabolic Research",
-      "Weight Management",
-      "Skin & Healing Research",
+      {
+        label: "Metabolic Research",
+        panel: {
+          heading: "Metabolic Research",
+          copy: "Practical reading around energy, glucose balance, appetite, and resilience.",
+          columns: [
+            [
+              "Blood sugar support",
+              "Mitochondrial output",
+              "Metabolic flexibility",
+              "Satiety pathways",
+            ],
+            [
+              "Clinical notes",
+              "Ingredient library",
+              "Expert reviews",
+              "Protocols",
+            ],
+          ],
+        },
+      },
+      {
+        label: "Weight Management",
+        panel: {
+          heading: "Weight Management",
+          copy: "Evidence-led resources on appetite, composition, recovery, and sustainable habits.",
+          columns: [
+            [
+              "Protein pacing",
+              "Craving control",
+              "Habit architecture",
+              "Training recovery",
+            ],
+            [
+              "Founder letters",
+              "Lab standards",
+              "Community results",
+              "Field reports",
+            ],
+          ],
+        },
+      },
+      {
+        label: "Skin & Healing Research",
+        panel: {
+          heading: "Skin & Healing Research",
+          copy: "A closer look at tissue repair, skin health, collagen support, and recovery.",
+          columns: [
+            [
+              "Barrier repair",
+              "Collagen turnover",
+              "Inflammation balance",
+              "Post-training healing",
+            ],
+            [
+              "Case studies",
+              "Journal roundups",
+              "Practitioner Q&A",
+              "Field reports",
+            ],
+          ],
+        },
+      },
     ],
     columns: [
       ["Clinical notes", "Ingredient library", "Expert reviews", "Protocols"],
@@ -141,6 +365,19 @@ function ArrowButton({ label = "Open", symbol = "+" }) {
 }
 
 function SiteHeader() {
+  const [activeFeatured, setActiveFeatured] = useState(() =>
+    Object.fromEntries(
+      primaryNav
+        .filter(
+          (item) =>
+            item.featured &&
+            item.featured.length > 0 &&
+            typeof item.featured[0] === "object",
+        )
+        .map((item) => [item.label, item.featured[0].label]),
+    ),
+  );
+
   return (
     <header className="site-header">
       <div className="promo-strip" aria-label="Current offers">
@@ -161,45 +398,85 @@ function SiteHeader() {
             <Menu size={24} strokeWidth={1.8} aria-hidden="true" />
           </button>
           <ul className="nav-links">
-            {primaryNav.map((item) => (
-              <li
-                className={item.featured ? "nav-item has-menu" : "nav-item"}
-                key={item.label}
-              >
-                <a href={item.href}>{item.label}</a>
-                {item.featured ? (
-                  <div className="mega-menu" aria-label={`${item.label} menu`}>
-                    <div className="mega-featured">
-                      {item.featured.map((link) => (
-                        <a href={item.href} key={link}>
-                          {link}
-                        </a>
-                      ))}
-                    </div>
-                    <div className="mega-body">
-                      <div>
-                        <h3>{item.label}</h3>
-                        <p>
-                          Curated products and thinking for evidence-led daily
-                          rituals.
-                        </p>
+            {primaryNav.map((item) => {
+              const featuredHasPanels =
+                item.featured && typeof item.featured[0] === "object";
+              const activePanel = featuredHasPanels
+                ? (
+                    item.featured.find(
+                      (entry) => entry.label === activeFeatured[item.label],
+                    ) ?? item.featured[0]
+                  ).panel
+                : null;
+
+              return (
+                <li
+                  className={item.featured ? "nav-item has-menu" : "nav-item"}
+                  key={item.label}
+                >
+                  <a href={item.href}>{item.label}</a>
+                  {item.featured ? (
+                    <div className="mega-menu" aria-label={`${item.label} menu`}>
+                      <div className="mega-featured">
+                        {item.featured.map((entry) =>
+                          typeof entry === "string" ? (
+                            <a href={item.href} key={entry}>
+                              {entry}
+                            </a>
+                          ) : (
+                            <button
+                              className={`mega-featured-button${
+                                activeFeatured[item.label] === entry.label
+                                  ? " is-active"
+                                  : ""
+                              }`}
+                              key={entry.label}
+                              onFocus={() =>
+                                setActiveFeatured((current) => ({
+                                  ...current,
+                                  [item.label]: entry.label,
+                                }))
+                              }
+                              onMouseEnter={() =>
+                                setActiveFeatured((current) => ({
+                                  ...current,
+                                  [item.label]: entry.label,
+                                }))
+                              }
+                              type="button"
+                            >
+                              {entry.label}
+                            </button>
+                          ),
+                        )}
                       </div>
-                      <div className="mega-columns">
-                        {item.columns.map((column, columnIndex) => (
-                          <div key={`${item.label}-${columnIndex}`}>
-                            {column.map((link) => (
-                              <a href={item.href} key={link}>
-                                {link}
-                              </a>
-                            ))}
-                          </div>
-                        ))}
+                      <div className="mega-body">
+                        <div>
+                          <h3>{activePanel?.heading ?? item.label}</h3>
+                          <p>
+                            {activePanel?.copy ??
+                              "Curated products and thinking for evidence-led daily rituals."}
+                          </p>
+                        </div>
+                        <div className="mega-columns">
+                          {(activePanel?.columns ?? item.columns).map(
+                            (column, columnIndex) => (
+                              <div key={`${item.label}-${columnIndex}`}>
+                                {column.map((link) => (
+                                  <a href={item.href} key={link}>
+                                    {link}
+                                  </a>
+                                ))}
+                              </div>
+                            ),
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ) : null}
-              </li>
-            ))}
+                  ) : null}
+                </li>
+              );
+            })}
           </ul>
         </div>
         <a className="brand" href="#top" aria-label="MyLongevity home">
@@ -351,32 +628,6 @@ export default function Home() {
           </blockquote>
         </div> */}
       </section>
-
-      {/* <section className="promise-section" id="promise">
-        <div className="promise-bg">
-          <img src="/images/hero-training.jpg" alt="" />
-        </div>
-        <div className="promise-content">
-          <h2>THE MY LONGEVITY PROMISE</h2>
-          <div className="promise-tabs">
-            <span>All Day Price Match</span>
-            <span>Over 1000 Reviews</span>
-          </div>
-          <div className="review-row">
-            {[
-              "One of the best wellbeing websites I've come across.",
-              "The best wellbeing website.",
-              "Amazing!",
-              "Great products, quick delivery.",
-            ].map((review) => (
-              <article key={review}>
-                <div className="stars">★★★★★</div>
-                <p>{review}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section> */}
 
       <footer className="footer">
         <div className="footer-logo">MyLongevity.</div>

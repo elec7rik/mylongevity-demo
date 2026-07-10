@@ -1,4 +1,10 @@
-import { Menu, Search, ShoppingBag, UserRound } from "lucide-react";
+import {
+  Menu,
+  MessageCircle,
+  Search,
+  ShoppingBag,
+  UserRound,
+} from "lucide-react";
 import HeroScrollEffect from "./HeroScrollEffect";
 
 const navItems = ["Shop", "Explore", "Support", "Learn"];
@@ -98,6 +104,34 @@ const process = [
   ],
 ];
 
+const socialLinks = [
+  {
+    label: "Instagram",
+    href: "#",
+    icon: "/social/instagram.png",
+  },
+  {
+    label: "TikTok",
+    href: "#",
+    icon: "/social/tiktok.png",
+  },
+  {
+    label: "YouTube",
+    href: "#",
+    icon: "/social/youtube.png",
+  },
+  {
+    label: "LinkedIn",
+    href: "#",
+    icon: "/social/linkedin.png",
+  },
+  {
+    label: "Pinterest",
+    href: "#",
+    icon: "/social/pinterest.png",
+  },
+];
+
 function ArrowButton({ label = "Open", symbol = "+" }) {
   return (
     <button className="circle-button" aria-label={label}>
@@ -134,10 +168,7 @@ function SiteHeader() {
               >
                 <a href={item.href}>{item.label}</a>
                 {item.featured ? (
-                  <div
-                    className="mega-menu"
-                    aria-label={`${item.label} menu`}
-                  >
+                  <div className="mega-menu" aria-label={`${item.label} menu`}>
                     <div className="mega-featured">
                       {item.featured.map((link) => (
                         <a href={item.href} key={link}>
@@ -368,6 +399,19 @@ export default function Home() {
               <button type="submit">Subscribe</button>
             </div>
           </form>
+        </div>
+        <div className="footer-bottom">
+          <div className="footer-socials" aria-label="Social links">
+            {socialLinks.map((link) => (
+              <a href={link.href} key={link.label} aria-label={link.label}>
+                <img src={link.icon} alt="" />
+              </a>
+            ))}
+          </div>
+          <p>Copyright © 2026, Healf. All rights reserved.</p>
+          <a className="footer-chat" href="#" aria-label="Open chat">
+            <MessageCircle size={38} strokeWidth={1.9} aria-hidden="true" />
+          </a>
         </div>
       </footer>
     </main>

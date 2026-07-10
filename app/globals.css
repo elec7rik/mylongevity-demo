@@ -126,7 +126,8 @@ img {
 }
 
 .topbar:hover,
-.topbar:focus-within {
+.topbar:focus-within,
+.site-nav-revealed .topbar {
   min-height: 78px;
   color: var(--ink);
   background: rgba(255, 255, 255, 0.96);
@@ -136,7 +137,8 @@ img {
 }
 
 .topbar:has(.has-menu:hover),
-.topbar:has(.has-menu:focus-within) {
+.topbar:has(.has-menu:focus-within),
+.topbar:has(.has-menu.is-menu-open) {
   border-bottom-left-radius: 0;
 }
 
@@ -209,9 +211,19 @@ img {
 }
 
 .has-menu > a {
+  position: relative;
   display: inline-flex;
   align-items: center;
   min-height: 66px;
+}
+
+.has-menu > a::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -14px;
+  right: -14px;
+  height: 18px;
 }
 
 .mega-menu {
@@ -234,7 +246,8 @@ img {
 }
 
 .has-menu:hover .mega-menu,
-.has-menu:focus-within .mega-menu {
+.has-menu:focus-within .mega-menu,
+.has-menu.is-menu-open .mega-menu {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);

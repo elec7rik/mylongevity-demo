@@ -47,18 +47,17 @@ img {
 }
 
 .hero-section {
-  --hero-content-y: 0px;
-  --hero-content-opacity: 1;
+  --hero-header-y: 0px;
+  --hero-header-opacity: 1;
   position: relative;
-  min-height: calc(100svh + clamp(150px, 18svh, 230px));
+  min-height: calc(100svh + clamp(96px, 12svh, 150px));
   background: var(--black);
   color: var(--white);
   isolation: isolate;
 }
 
 .hero-layer {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 2;
   height: 100svh;
   min-height: 620px;
@@ -66,12 +65,13 @@ img {
 }
 
 .site-header {
-  position: absolute;
+  position: fixed;
   inset: 8px 18px auto;
   z-index: 20;
   color: var(--white);
-  transform: translate3d(0, var(--hero-content-y), 0);
-  will-change: transform;
+  opacity: var(--hero-header-opacity);
+  transform: translate3d(0, var(--hero-header-y), 0);
+  will-change: transform, opacity;
   pointer-events: auto;
 }
 
@@ -392,9 +392,6 @@ img {
   bottom: clamp(34px, 8vw, 110px);
   max-width: 420px;
   color: var(--white);
-  transform: translate3d(0, var(--hero-content-y), 0);
-  opacity: var(--hero-content-opacity);
-  will-change: transform, opacity;
   text-shadow: 0 1px 18px rgba(0, 0, 0, 0.32);
   pointer-events: auto;
 }
@@ -408,7 +405,7 @@ img {
   font-size: clamp(64px, 5vw, 80px);
   line-height: 0.98;
   max-width: 520px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .hero-copy h1 {
@@ -467,7 +464,7 @@ img {
 
 .hero-section + .pillars-section {
   border-radius: 32px 32px 0 0;
-  margin-top: calc(-1 * clamp(72px, 10vw, 132px));
+  margin-top: calc(-1 * clamp(132px, 18svh, 210px));
   overflow: hidden;
 }
 

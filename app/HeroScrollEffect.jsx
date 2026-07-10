@@ -5,8 +5,9 @@ import { useLayoutEffect } from "react";
 export default function HeroScrollEffect() {
   useLayoutEffect(() => {
     const hero = document.querySelector(".hero-section");
+    const header = document.querySelector(".site-header");
 
-    if (!hero) {
+    if (!hero || !header) {
       return undefined;
     }
 
@@ -17,19 +18,23 @@ export default function HeroScrollEffect() {
     const update = () => {
       frame = 0;
       const rect = hero.getBoundingClientRect();
-      const distance = Math.max(1, rect.height);
-      const rawProgress = Math.min(1, Math.max(0, -rect.top / distance));
-      const progress = rawProgress < 0.004 ? 0 : rawProgress;
-      const y = `${progress * 76}px`;
-      const opacity = `${1 - progress * 0.18}`;
+      const holdDistance = 52;
+      const tuckDistance = 58;
+      const scrolledPastTop = Math.max(0, -rect.top);
+      const tuckProgress = Math.min(
+        1,
+        Math.max(0, (scrolledPastTop - holdDistance) / tuckDistance),
+      );
+      const y = `${Math.round(tuckProgress * -(header.offsetHeight + 18))}px`;
+      const opacity = `${1 - tuckProgress * 0.35}`;
 
       if (y !== lastY) {
-        hero.style.setProperty("--hero-content-y", y);
+        hero.style.setProperty("--hero-header-y", y);
         lastY = y;
       }
 
       if (opacity !== lastOpacity) {
-        hero.style.setProperty("--hero-content-opacity", opacity);
+        hero.style.setProperty("--hero-header-opacity", opacity);
         lastOpacity = opacity;
       }
     };

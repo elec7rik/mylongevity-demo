@@ -408,7 +408,7 @@ export default function Home() {
               </a>
             ))}
           </div>
-          <p>Copyright © 2026, Healf. All rights reserved.</p>
+          <p>Copyright © 2026, MyLongevity. All rights reserved.</p>
           <a className="footer-chat" href="#" aria-label="Open chat">
             <MessageCircle size={38} strokeWidth={1.9} aria-hidden="true" />
           </a>

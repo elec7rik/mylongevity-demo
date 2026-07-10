@@ -9,3 +9,5 @@ When implementing from a selected generated mock, treat that image as the source
 Hero scroll direction: preserve the 5dfe9f2 behavior where the hero media feels pinned to the viewport while the promo/nav/copy layer moves over it. Lower dark sections should slide over the hero media without exposing top gaps or making the copy feel glued to the image.
 
 Header behavior: keep the promo strip fixed and visible throughout the whole site. The navigation bar should stay visible for an initial scroll distance, tuck upward smoothly on downward scroll, and reappear smoothly whenever the user scrolls upward anywhere on the page.
+
+Header visual state: the scroll-up white/revealed nav treatment is for lower page content only. Keep that white state through the dark section/hero overlap, then switch to the default transparent hero state when the nav reaches the hero headline and keep it transparent for the rest of the upward scroll through the hero.
